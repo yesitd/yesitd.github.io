@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="imagenes/sin.png" type="image/x-icon">
+    <title>Gestor de Artículos</title>
+    <link rel="stylesheet" href="ARTICULO.CSS">
+    <script src="article.js"></script>
+</head>
+<body> 
+    <div class="container">
+        <header>
+            <h1>Gestor de Artículos</h1>
+            <img src="imagenes/sin.png" alt="Descripción de la imagen" class="imagen-posicion" width="150">  
+            
+            <p class="description">Crea y publica tus artículos en diferentes plataformas desde un solo lugar</p>
+        </header>
+
+        <div class="success-message" id="successMessage">
+            ¡Artículo enviado correctamente!
+        </div>
+
+        <div class="card">
+            <form id="articleForm">
+                <div class="form-group">
+                    <label for="title">Título del Artículo</label>
+                    <input type="text" id="title" name="title" placeholder="Escribe un título atractivo" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="summary">Resumen</label>
+                    <textarea id="summary" name="summary" placeholder="Escribe un breve resumen de tu artículo (máximo 150 palabras)" maxlength="1000"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="content">Contenido</label>
+                    <textarea id="content" name="content" placeholder="Escribe el contenido completo de tu artículo aquí..." required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Categoría</label>
+                    <select id="category" name="category" required>
+                        <option value="">Selecciona una categoría</option>
+                        <option value="Noticias">Noticias</option>
+                        <option value="nuevo">nuevo</option>
+                        <option value="deportes">deportes</option>
+                        <option value="Artes">Artes</option>
+                        <option value="Opinion">Opinion</option>
+                        <option value="eventos">eventos</option>
+                        <option value="semanal">semanal</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="tags">Etiquetas (separadas por comas)</label>
+                    <input type="text" id="tags" name="tags" placeholder="Ej: marketing, redes sociales, estrategia">
+                    <div class="tags-container" id="tagsContainer"></div>
+                </div>
+                <div class="form-group" id="customUrlContainer" style="display: none;">
+                    <label for="customUrl">URL del sitio personalizado</label>
+                    <input type="url" id="customUrl" name="customUrl" placeholder="https://tusitio.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="image">Imagen destacada (opcional)</label>
+                    <input type="file" id="image" name="image" accept="image/*">
+                </div>
+
+                <div class="button-group">
+                    <button type="submit" class="btn-primary">Publicar artículo</button>
+                    <a href="index.html"><button type="button"class="btn-terciario" >Volver</button></a>
+                
+                </div>
+            </form>
+        </div>
+
+        <div class="preview-container" id="previewContainer">
+            <div class="card">
+                <h3 id="previewTitle"></h3>
+                <div class="tags-container" id="previewTags"></div>
+                <p><strong>Resumen:</strong></p>
+                <div id="previewSummary" class="preview-content"></div>
+                <p><strong>Contenido:</strong></p>
+                <div id="previewContent" class="preview-content"></div>
+                <p><strong>Plataformas seleccionadas:</strong></p>
+                <div id="previewPlatforms"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

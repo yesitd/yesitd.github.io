@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscador de Perfiles de Usuario</title>
+    <link rel="shortcut icon" href="imagenes/sin.png" type="image/x-icon">
+    <link rel="stylesheet" href="bibibliotec.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="header-title">
+                    <span class="icon">👥</span>
+                    Directorio de Usuarios
+                </h1>
+                   <img src="imagenes/sin.png" alt="Descripción de la imagen" class="imagen-posicion" width="190">
+                <p class="header-subtitle">Encuentra y conecta con usuarios de nuestra plataforma</p>
+            </div>
+        </header>
+
+        <!-- Search Section -->
+        <section class="search-section">
+            <div class="search-container">
+                <div class="search-box">
+                    <input 
+                        type="text" 
+                        id="searchInput" 
+                        placeholder="Buscar por nombre, email o especialidad..."
+                        class="search-input"
+                    >
+                    <button class="search-btn">
+                        <span class="search-icon">🔍</span>
+                    </button>
+                    <a href="inicio.html"><button class="back-btn" onclick="window.history.back();" style="margin-left: 12px; background: #a80000; color: #fff; border: 2px solid #000000; border-radius: 8px; padding: 10px 18px; font-weight: 600; cursor: pointer; transition: background 0.2s;">
+                        Volver
+                    </button></a>
+                </div>
+                
+                <div class="filters">
+                    <select id="roleFilter" class="filter-select">
+                        <option value="">Todas las Categorías</option>
+                        <option value="Gorriones(2020-2021-2022)">Gorriones(2020-2021-2022)</option>
+                        <option value="Benjamines(2015-2019)">Benjamines(2015-2019)</option>
+                        <option value="Babis(2016-2017)">Babis(2016-2017)</option>
+                        <option value="Pibes(2014-2015)">Pibes(2014-2015)</option>
+                        <option value="Sub-15(2010-2011)">Sub-15(2010-2011)</option>
+                        <option value="Sub-17(2008-2009)">Sub-17(2008-2009)</option>
+                    </select>
+                    
+                    <select id="statusFilter" class="filter-select">
+                        <option value="">Todos los estados</option>
+                        <option value="Activo">Activo</option>
+                        <option value="Inactivo">Inactivo</option>
+                        <option value="Suspendido">Suspendido</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section class="results-section">
+            <div class="results-header">
+                <h2 id="resultsTitle">Todos los usuarios</h2>
+                <span id="resultsCount" class="results-count">12 usuarios encontrados</span>
+            </div>
+            
+            <div id="userGrid" class="user-grid">
+                <!-- Los usuarios se cargarán aquí dinámicamente -->
+            </div>
+            
+            <div id="noResults" class="no-results" style="display: none;">
+                <div class="no-results-icon">🔍</div>
+                <h3>No se encontraron usuarios</h3>
+                <p>Intenta ajustar tus criterios de búsqueda</p>
+            </div>
+        </section>
+
+        <!-- User Modal -->
+        <div id="userModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close-btn">&times;</span>
+                <div id="modalContent">
+                    <!-- El contenido del modal se cargará aquí -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="biblo.js"></script>
+</body>
+</html>

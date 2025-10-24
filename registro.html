@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Usuarios</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="regristro.css">
+    <link rel="shortcut icon" href="imagenes/sin.png" type="image/x-icon">
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+    <!-- Fondo con patrón de partículas -->
+    <div class="animated-bg">
+        <div class="bg-pattern"></div>
+        <div class="particle-overlay"></div>
+        <div class="overlay"></div>
+    </div>
+
+    <!-- Formulario de registro -->
+    <div class="form-container w-full max-w-md">
+        <div class="glass-effect rounded-2xl p-8 shadow-2xl">
+                <div class="text-center mb-8">
+                <h1 class="text-4xl font-bold text-[#e63946] mb-2">Registro</h1>
+                <p class="text-white">Crea tu cuenta nueva</p>
+            </div>            <form class="space-y-6">
+                <!-- Nombre completo -->
+                <div>
+                    <label for="nombre" class="block text-sm font-medium text-gray-200 mb-2">
+                        Nombre Completo
+                    </label>
+                    <input 
+                        type="text" 
+                        id="nombre" 
+                        name="nombre" 
+                        required
+                        class="input-field w-full px-4 py-3 rounded-lg text-white placeholder-gray-500"
+                        placeholder="Nombre Del Deportista"
+                    >
+                </div>
+
+                <!-- Correo electrónico -->
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-200 mb-2">
+                        Correo Electrónico
+                    </label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        required
+                        class="input-field w-full px-4 py-3 rounded-lg text-white placeholder-gray-500"
+                        placeholder="tu@email.com"
+                    >
+                </div>
+
+                <!-- Contraseña -->
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-200 mb-2">
+                        Contraseña
+                    </label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        required
+                        class="input-field w-full px-4 py-3 rounded-lg text-white placeholder-gray-500"
+                        placeholder="••••••••"
+                    >
+                </div>
+
+                <!-- Confirmar contraseña -->
+                <div>
+                    <label for="confirm-password" class="block text-sm font-medium text-gray-200 mb-2">
+                        Confirmar Contraseña
+                    </label>
+                    <input 
+                        type="password" 
+                        id="confirm-password" 
+                        name="confirm-password" 
+                        required
+                        class="input-field w-full px-4 py-3 rounded-lg text-white placeholder-gray-500"
+                        placeholder="••••••••"
+                    >
+                </div>
+
+                <!-- Términos y condiciones -->
+                
+
+                <!-- Opciones principales con sub-opciones dinámicas -->
+                <div class="mt-4">
+                    <label for="main-option" class="block text-sm font-medium text-gray-200 mb-2">Año de Nacimiento Del Deportista</label>
+                    <select id="main-option" name="main-option" class="input-field w-full px-4 py-3 rounded-lg text-gray-800">
+                        <option value="">Selecciona una opción</option>
+                        <option value="Gorriones">Gorriones(2020-2021)</option>
+                        <option value="Benjamines">Benjamines(2015-2019)</option>
+                        <option value="Babis">Babis(2016-2017)</option>
+                        <option value="Pibes">Pibes(2014-2015)</option>
+                        <option value="Sub-15">Sub-15(2010-2011)</option>
+                        <option value="Sub-17">Sub-17(2008-2009)</option>
+                    </select>
+                    <div class="flex items-start">
+                    <input 
+                        type="checkbox" 
+                        id="terms" 
+                        name="terms" 
+                        required
+                        class="mt-1 h-4 w-4 rounded border-red-800 bg-gray-900 text-red-600 focus:ring-red-600 focus:ring-offset-gray-900"
+                    >
+                    <label for="terms" class="ml-3 text-sm text-gray-300">
+                        Acepto los <a href="#" class="text-red-500 hover:text-red-400 underline">términos y condiciones</a>
+                    </label>
+                </div>
+
+                    <!-- Sub-opciones para 'Fútbol' (oculto por defecto) -->
+                    <div id="sub-options-futbol" class="sub-options mt-3" style="display: none;">
+                        <label class="block text-sm text-gray-600 mb-2">Categorías de Fútbol</label>
+                        <div class="flex gap-2 flex-wrap">
+                            <label class="inline-flex items-center gap-2 px-2 py-1 bg-white/80 rounded-lg text-sm">
+                                <input type="checkbox" name="cat[]" value="infantil" class="h-4 w-4">
+                                Infantil
+                            </label>
+                            <label class="inline-flex items-center gap-2 px-2 py-1 bg-white/80 rounded-lg text-sm">
+                                <input type="checkbox" name="cat[]" value="juvenil" class="h-4 w-4">
+                                Juvenil
+                            </label>
+                            <label class="inline-flex items-center gap-2 px-2 py-1 bg-white/80 rounded-lg text-sm">
+                                <input type="checkbox" name="cat[]" value="adulto" class="h-4 w-4">
+                                Adulto
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Botón de registro -->
+                <button 
+                    type="submit" 
+                    class="btn-primary w-full py-3 px-4 rounded-lg text-white font-semibold text-lg"
+                >
+                    Registrarse
+                </button>
+
+                <!-- Link de inicio de sesión -->
+                <p class="text-center text-sm text-gray-400 mt-6">
+                    ¿Ya tienes una cuenta? 
+                    <a href="inicio.html" class="text-red-500 hover:text-red-400 font-medium underline">
+                        Inicia sesión
+                    </a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Mostrar/ocultar sub-opciones según selección
+        document.addEventListener('DOMContentLoaded', function () {
+            const main = document.getElementById('main-option');
+            const futbol = document.getElementById('sub-options-futbol');
+
+            function updateSubOptions() {
+                if (!main) return;
+                if (main.value === 'futbol') {
+                    futbol.style.display = 'block';
+                } else {
+                    futbol.style.display = 'none';
+                }
+            }
+
+            if (main) {
+                main.addEventListener('change', updateSubOptions);
+                // inicializar en caso de valores preseleccionados
+                updateSubOptions();
+            }
+        });
+    </script>
+</body>
+</html>

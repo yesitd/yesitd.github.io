@@ -1,0 +1,155 @@
+
+        @keyframes moveHorizontalRight {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        @keyframes moveHorizontalLeft {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        @keyframes moveVertical {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+        
+        .bg-layer-1 {
+            animation: moveHorizontalRight 20s linear infinite;
+        }
+        
+        .bg-layer-2 {
+            animation: moveHorizontalLeft 25s linear infinite;
+        }
+        
+        .bg-layer-3 {
+            animation: moveVertical 30s linear infinite;
+        }
+
+        /* --- Fondo de patrón animado (partículas) similar a regristro.css --- */
+        @keyframes float {
+            0% { transform: translate(0,0) rotate(0deg); }
+            50% { transform: translate(12px,8px) rotate(0.6deg); }
+            100% { transform: translate(0,0) rotate(0deg); }
+        }
+
+        @keyframes bgMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 600px 600px; }
+        }
+
+        .animated-bg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: linear-gradient(135deg, #ffffff 0%, #fbfbfb 50%, #ffffff 100%);
+            overflow: hidden;
+        }
+
+        .bg-pattern {
+            position: absolute;
+            top: -60px;
+            left: -60px;
+            width: calc(100% + 120px);
+            height: calc(100% + 120px);
+            background-image: url('imagenes/sin.png');
+            background-size: 120px auto;
+            background-repeat: repeat;
+            opacity: 0.28;
+            animation: float 18s ease-in-out infinite, bgMove 40s linear infinite;
+            filter: saturate(1.08) contrast(1.04);
+            z-index: 0;
+            pointer-events: none;
+            will-change: transform, background-position;
+        }
+
+        .particle-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle at 50% 50%, rgba(230,57,70,0.03) 0%, rgba(230,57,70,0.02) 30%, transparent 70%);
+            z-index: 1;
+            pointer-events: none;
+            mix-blend-mode: multiply;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.0) 0%, rgba(255,255,255,0.0) 25%, rgba(0,0,0,0.04) 60%, rgba(0,0,0,0.12) 100%);
+            z-index: 2;
+            backdrop-filter: blur(2px);
+            pointer-events: none;
+        }
+
+        /* Ajustes para que el formulario esté por encima */
+        .glass-effect {
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Tema del formulario: negro + rojo con texto blanco (no cambia el fondo de la página) */
+        .glass-effect {
+            background: rgba(0,0,0,0.92); /* panel oscuro */
+            border: 2px solid #e63946; /* borde rojo */
+            color: #ffffff;
+            padding: 1.5rem;
+        }
+
+        .glass-effect label,
+        .glass-effect .text-gray-400,
+        .glass-effect .text-gray-300 {
+            color: #ffffff !important;
+        }
+
+        .glass-effect input[type="text"],
+        .glass-effect input[type="password"],
+        .glass-effect input[type="email"],
+        .glass-effect select {
+            background: rgba(0,0,0,0.6) !important;
+            color: #ffffff !important;
+            border: 1px solid rgba(230,57,70,0.25) !important;
+        }
+
+        .glass-effect input::placeholder {
+            color: rgba(255,255,255,0.65) !important;
+        }
+
+        .glass-effect input:focus,
+        .glass-effect select:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(230,57,70,0.12);
+            border-color: #e63946 !important;
+        }
+
+        .glass-effect input[type="checkbox"] {
+            accent-color: #e63946;
+            background: transparent;
+            border-color: rgba(255,255,255,0.2);
+        }
+
+        .glass-effect .btn,
+        .glass-effect button {
+            background: linear-gradient(90deg, #e63946 0%, #d62e3b 100%) !important;
+            color: #ffffff !important;
+            border: none !important;
+            box-shadow: 0 8px 20px rgba(230,57,70,0.15) !important;
+        }
+
+        .glass-effect a {
+            color: #ffdede;
+        }
+
+        /* make sure helper text is visible */
+        .glass-effect p,
+        .glass-effect .text-sm {
+            color: rgba(255,255,255,0.85);
+        }
+

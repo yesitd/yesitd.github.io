@@ -1,0 +1,184 @@
+<!-- Panel de información de usuario -->
+<div class="modal" id="viewUserModal">
+    <div class="modal-content user-info-panel">
+        <div class="modal-header">
+            <h3 class="modal-title" id="viewUserTitle">Información del Usuario</h3>
+            <button class="close-btn" onclick="closeViewUser()">&times;</button>
+        </div>
+        <div id="viewUserBody"></div>
+    </div>
+</div>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración - Usuarios de Fútbol</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+     <link rel="shortcut icon" href="imagenes/sin.png" type="image/x-icon">
+    <link rel="stylesheet" href="desbo.css">
+    <script src="desboal.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header" style="display: flex; align-items: center; gap: 24px;">
+            <img src="imagenes/sin.png" alt="Logo" style="height: 85px; width: auto; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+            <div>
+                <h1 style="margin-bottom: 4px;"><i class="fas fa-users"></i> Panel de Administración</h1>
+                <p>Gestión completa de usuarios del sistema de fútbol</p>
+            </div>
+        </header>
+
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-users"></i></div>
+                <div class="stat-number" id="totalUsers">0</div>
+                <div class="stat-label">Total Usuarios</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-hourglass-half"></i></div>
+                <div class="stat-number" id="pendingUsers">0</div>
+                <div class="stat-label">Pendientes</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-running"></i></div>
+                <div class="stat-number" id="inactivePlayers">0</div>
+                <div class="stat-label">Jugadores Inactivos</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-user-check"></i></div>
+                <div class="stat-number" id="activeUsers">0</div>
+                <div class="stat-label">Usuarios Activos</div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls">
+            <div class="controls-row">
+                <div class="search-group">
+                    <input type="text" class="search-input" id="searchInput" placeholder="Buscar por nombre, email o equipo...">
+                    <select class="filter-select" id="roleFilter">
+                        <option value="">Todas las Categorías</option>
+                        <option value="Gorriones(2020-2021-2022)">Gorriones(2020-2021-2022)</option>
+                        <option value="Benjamines(2015-2019)">Benjamines(2015-2019)</option>
+                        <option value="Babis(2016-2017)">Babis(2016-2017)</option>
+                        <option value="Pibes(2014-2015)">Pibes(2014-2015)</option>
+                        <option value="Sub-15(2010-2011)">Sub-15(2010-2011)</option>
+                        <option value="Sub-17(2008-2009)">Sub-17(2008-2009)</option>
+                    </select>
+                    <select class="filter-select" id="statusFilter">
+                        <option value="">Todos los estados</option>
+                        <option value="active">Activos</option>
+                        <option value="inactive">Inactivos</option>
+                        <option value="pending">Pendientes</option>
+                    </select>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <button class="btn btn-primary" onclick="openModal('add')">
+                        <i class="fas fa-plus"></i> Agregar Usuario
+                    </button>
+                    <button class="btn btn-export" onclick="exportUsers()" title="Exportar usuarios a CSV">
+                        <span class="export-icon"><i class="fas fa-file-export"></i></span>
+                        <span class="export-text">Exportar</span>
+                    </button>
+    <div id="notification" class="notification" style="display:none;"></div>
+                    <button class="btn btn-secondary" onclick="refreshData()">
+                        <i class="fas fa-sync-alt"></i> Actualizar
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Users Table -->
+        <div class="table-container">
+            <div class="table-header">
+                <h3><i class="fas fa-table"></i> Lista de Usuarios</h3>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Usuario</th>
+                        <th>categoría</th>
+                        <th>Equipo</th>
+                        <th>Estado</th>
+                        <th>Último Acceso</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="usersTableBody">
+                    <!-- Users will be populated by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination" id="pagination">
+            <!-- Pagination will be populated by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="userModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Agregar Usuario</h3>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <form id="userForm">
+                <div class="form-group">
+                    <label class="form-label">Foto de Perfil</label>
+                    <input type="file" class="form-input" id="userImage" accept="image/*">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Nombre Completo</label>
+                    <input type="text" class="form-input" id="userName" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-input" id="userEmail" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Rol</label>
+                    <select class="form-input" id="userRole" required>
+                        <option value="">Seleccione la categoría</option>
+                        <option value="Gorriones(2020-2021-2022)">Gorriones(2020-2021-2022)</option>
+                        <option value="Benjamines(2015-2019)">Benjamines(2015-2019)</option>
+                        <option value="Babis(2016-2017)">Babis(2016-2017)</option>
+                        <option value="Pibes(2014-2015)">Pibes(2014-2015)</option>
+                        <option value="Sub-15(2010-2011)">Sub-15(2010-2011)</option>
+                        <option value="Sub-17(2008-2009)">Sub-17(2008-2009)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Equipo</label>
+                    <input type="text" class="form-input" id="userTeam" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Teléfono</label>
+                    <input type="tel" class="form-input" id="userPhone">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Estado</label>
+                    <select class="form-input" id="userStatus" required>
+                        <option value="active">Activo</option>
+                        <option value="inactive">Inactivo</option>
+                        <option value="pending">Pendiente</option>
+                    </select>
+                </div>
+                <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 30px;">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">
+                        <span id="submitText">Guardar Usuario</span>
+                        <div class="loading" id="submitLoading" style="display: none;"></div>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification"></div>
+</body>
+</html>

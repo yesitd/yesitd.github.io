@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="loginstile.css">
+    <link rel="icon" type="image/x-icon" href="imagenes/sin.png">
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 relative overflow-hidden bg-black">
+    
+    <!-- Fondo con patrón de partículas (imagen sin.png) -->
+    <div class="animated-bg absolute inset-0">
+        <div class="bg-pattern"></div>
+        <div class="particle-overlay"></div>
+        <div class="overlay"></div>
+    </div>
+    
+    <!-- Formulario de Login -->
+    <div class="relative z-10 w-full max-w-md">
+        <div class="glass-effect rounded-2xl shadow-2xl p-8">
+            <!-- Header -->
+            <div class="text-center mb-8">
+                <h1 class="text-4xl font-bold text-red-500 mb-2">Iniciar Sesión</h1>
+                <p class="text-gray-400">Accede a tu cuenta</p>
+            </div>
+            
+            <!-- Formulario -->
+            <form class="space-y-6">
+                <!-- Email o Usuario -->
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-300 mb-2">
+                        Correo Electrónico o Usuario
+                    </label>
+                    <input 
+                        type="text" 
+                        id="email" 
+                        name="email"
+                        required
+                        class="w-full px-4 py-3 bg-black/50 border border-red-900/50 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
+                        placeholder="usuario@ejemplo.com"
+                    >
+                </div>
+                
+                <!-- Contraseña -->
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-300 mb-2">
+                        Contraseña
+                    </label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password"
+                        required
+                        class="w-full px-4 py-3 bg-black/50 border border-red-900/50 rounded-lg text-white placeholder-white 500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
+                        placeholder="••••••••"
+                    >
+                </div>
+                
+                <!-- Recordarme y Olvidé mi contraseña -->
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <input 
+                            type="checkbox" 
+                            id="remember" 
+                            name="remember"
+                            class="w-4 h-4 bg-black/50 border-red-900/50 rounded text-red-600 focus:ring-red-500 focus:ring-2"
+                        >
+                        <label for="remember" class="ml-2 text-sm text-gray-400">
+                            Recordarme
+                        </label>
+                    </div>
+                    <a href="recuperar.html" class="text-sm text-red-500 hover:text-red-400 transition-colors">
+                        ¿Olvidaste tu contraseña?
+                    </a>
+                </div>
+                
+                <!-- Botón de Iniciar Sesión -->
+                <button 
+                    type="submit"
+                    class="w-full bg-gradient-to-r from-red-600 to-red-700 text-white font-semibold py-3 px-4 rounded-lg hover:from-red-700 hover:to-red-800 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-black transition-all transform hover:scale-[1.02] shadow-lg shadow-red-900/50"
+                >
+                    Iniciar Sesión
+                </button>
+                
+                

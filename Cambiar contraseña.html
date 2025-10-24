@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambiar Contraseña</title>
+     <link rel="shortcut icon" href="imagenes/sin.png" type="image/x-icon">
+    <link rel="stylesheet" href="cambiar_contra.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+           <img src="imagenes/sin.png" alt="Descripción de la imagen" class="imagen-posicion" width="190">
+            <h1 class="title">Cambiar Contraseña</h1>
+            <p class="subtitle">Actualiza tu contraseña para mantener tu cuenta segura</p>
+        </div>
+
+        <div class="success-message" id="successMessage">
+            ✅ Contraseña cambiada exitosamente
+        </div>
+
+        <div class="error-message" id="errorMessage">
+            ❌ Error al cambiar la contraseña. Inténtalo de nuevo.
+        </div>
+
+        <form id="passwordForm">
+            <div class="form-group">
+                <label for="currentPassword" class="form-label">Contraseña Actual</label>
+                <div class="password-container">
+                    <input type="password" id="currentPassword" class="form-input"
+                        placeholder="Ingresa tu contraseña actual" required>
+                    <button type="button" class="toggle-password" onclick="togglePassword('currentPassword')">
+                        👁️
+                    </button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="newPassword" class="form-label">Nueva Contraseña</label>
+                <div class="password-container">
+                    <input type="password" id="newPassword" class="form-input" placeholder="Ingresa tu nueva contraseña"
+                        required>
+                    <button type="button" class="toggle-password" onclick="togglePassword('newPassword')">
+                        👁️
+                    </button>
+                </div>
+
+                <div class="password-strength">
+                    <div class="strength-bar">
+                        <div class="strength-fill" id="strengthBar"></div>
+                    </div>
+                    <div class="strength-text" id="strengthText">Ingresa una contraseña</div>
+                </div>
+
+                <div class="requirements">
+                    <div class="requirements-title">Requisitos de la contraseña:</div>
+                    <div class="requirement" id="req-length">
+                        <span class="requirement-icon">❌</span>
+                        Al menos 8 caracteres
+                    </div>
+                    <div class="requirement" id="req-uppercase">
+                        <span class="requirement-icon">❌</span>
+                        Una letra mayúscula
+                    </div>
+                    <div class="requirement" id="req-lowercase">
+                        <span class="requirement-icon">❌</span>
+                        Una letra minúscula
+                    </div>
+                    <div class="requirement" id="req-number">
+                        <span class="requirement-icon">❌</span>
+                        Un número
+                    </div>
+                    <div class="requirement" id="req-special">
+                        <span class="requirement-icon">❌</span>
+                        Un carácter especial (!@#$%^&*)
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword" class="form-label">Confirmar Nueva Contraseña</label>
+                <div class="password-container">
+                    <input type="password" id="confirmPassword" class="form-input"
+                        placeholder="Confirma tu nueva contraseña" required>
+                    <button type="button" class="toggle-password" onclick="togglePassword('confirmPassword')">
+                        👁️
+                    </button>
+                </div>
+            </div>
+
+            <button type="submit" class="btn" id="submitBtn" disabled>
+                Cambiar Contraseña
+            </button>
+
+            <a href="inicio.html" class="cancel-btn">Cancelar</a>
+        </form>
+    </div>
+
+    <script>
+        // Función para mostrar/ocultar contraseña
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            const button = input.nextElementSibling;
+
+            if (input.type === 'password') {
+                input.type = 'text';
+                button.textContent = '🙈';
+            } else {
+                input.type = 'password';
+                button.textContent = '👁️';
+            }
+        }
+
+        // Validación de contraseña en tiempo real
+        document.getElementById('newPassword').addEventListener('input', function (e) {
+            const password = e.target.value;
+            checkPasswordStrength(password);
+            validateForm();
+        });
+
+        document.getElementById('confirmPassword').addEventListener('input', validateForm);
+        document.getElementById('currentPassword').addEventListener('input', validateForm);
+
+        function checkPasswordStrength(password) {
+            const requirements = {
+                length: password.length >= 8,
+                uppercase: /[A-Z]/.test(password),
+                lowercase: /[a-z]/.test(password),
+                number: /\d/.test(password),
+                special: /[!@#$%^&*(),.?":{}|<>]/.test(password)
+            };
+
+            // Actualizar indicadores visuales
+            updateRequirement('req-length', requirements.length);
+            updateRequirement('req-uppercase', requirements.uppercase);
+            updateRequirement('req-lowercase', requirements.lowercase);
+            updateRequirement('req-number', requirements.number);
+            updateRequirement('req-special', requirements.special);
+
+            // Calcular fuerza de la contraseña
+            const validCount = Object.values(requirements).filter(Boolean).length;
+            const strengthBar = document.getElementById('strengthBar');
+            const strengthText = document.getElementById('strengthText');
+
+            strengthBar.className = 'strength-fill';
+
+            if (password.length === 0) {
+                strengthText.textContent = 'Ingresa una contraseña';
+            } else if (validCount <= 2) {
+                strengthBar.classList.add('strength-weak');
+                strengthText.textContent = 'Contraseña débil';
+            } else if (validCount <= 3) {
+                strengthBar.classList.add('strength-fair');
+                strengthText.textContent = 'Contraseña regular';
+            } else if (validCount <= 4) {
+                strengthBar.classList.add('strength-good');
+                strengthText.textContent = 'Contraseña buena';
+            } else {
+                strengthBar.classList.add('strength-strong');
+                strengthText.textContent = 'Contraseña fuerte';
+            }
+        }
+
+        function updateRequirement(id, isValid) {
+            const element = document.getElementById(id);
+            const icon = element.querySelector('.requirement-icon');
+
+            if (isValid) {
+                element.classList.add('valid');
+                element.classList.remove('invalid');
+                icon.textContent = '✅';
+            } else {
+                element.classList.add('invalid');
+                element.classList.remove('valid');
+                icon.textContent = '❌';
+            }
+        }
+
+        function validateForm() {
+            const currentPassword = document.getElementById('currentPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const submitBtn = document.getElementById('submitBtn');
+
+            const isValidPassword = newPassword.length >= 8 &&
+                /[A-Z]/.test(newPassword) &&
+                /[a-z]/.test(newPassword) &&
+                /\d/.test(newPassword) &&
+                /[!@#$%^&*(),.?":{}|<>]/.test(newPassword);
+
+            const isFormValid = currentPassword.length > 0 &&
+                isValidPassword &&
+                newPassword === confirmPassword;
+
+            submitBtn.disabled = !isFormValid;
+        }
+
+        // Manejar envío del formulario
+        document.getElementById('passwordForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const submitBtn = document.getElementById('submitBtn');
+            const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('errorMessage');
+
+            // Simular proceso de cambio de contraseña
+            submitBtn.textContent = 'Cambiando...';
+            submitBtn.disabled = true;
+
+            setTimeout(() => {
+                // Simular éxito (en una aplicación real, aquí harías la petición al servidor)
+                successMessage.style.display = 'block';
+                errorMessage.style.display = 'none';
+
+                // Resetear formulario
+                document.getElementById('passwordForm').reset();
+                document.getElementById('strengthBar').className = 'strength-fill';
+                document.getElementById('strengthText').textContent = 'Ingresa una contraseña';
+
+                // Resetear requisitos
+                ['req-length', 'req-uppercase', 'req-lowercase', 'req-number', 'req-special'].forEach(id => {
+                    updateRequirement(id, false);
+                });
+
+                submitBtn.textContent = 'Cambiar Contraseña';
+                submitBtn.disabled = true;
+
+                // Ocultar mensaje después de 3 segundos
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                }, 3000);
+
+            }, 2000);
+        });
+    </script>
+</body>
+
+</html>

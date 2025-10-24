@@ -1,0 +1,159 @@
+        /* suaves animaciones para el patrón y movimiento de fondo */
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            50% {
+                transform: translate(12px, 8px) rotate(0.6deg);
+            }
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+        }
+
+        @keyframes bgMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 600px 600px; }
+        }
+
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+            /* fondo general claro y cálido que contraste con la imagen 'sin.png' */
+            background: linear-gradient(135deg, #ffffff 0%, #fbfbfb 50%, #ffffff 100%);
+        }
+
+        .bg-pattern {
+            position: absolute;
+            top: -60px;
+            left: -60px;
+            width: calc(100% + 120px);
+            height: calc(100% + 120px);
+            background-image: url('imagenes/sin.png');
+            background-size: 120px auto;
+            background-repeat: repeat;
+            /* subo la opacidad para que las partículas sean claramente visibles */
+            opacity: 0.28;
+            /* combinación de transform y desplazamiento del background para movimiento más natural */
+            animation: float 18s ease-in-out infinite, bgMove 40s linear infinite;
+            filter: saturate(1.08) contrast(1.04);
+            z-index: 0;
+            pointer-events: none;
+            will-change: transform, background-position;
+        }
+
+        .particle-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* ligera capa tintada para enfatizar los tonos rojos sin ocultar la imagen */
+            background-image: radial-gradient(circle at 50% 50%, 
+                rgba(230,57,70,0.03) 0%,
+                rgba(230,57,70,0.02) 30%,
+                transparent 70%);
+            z-index: 1;
+            pointer-events: none;
+            mix-blend-mode: multiply;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* vignette sutil para mejorar legibilidad sin ocultar colores */
+            background: radial-gradient(circle at center,
+                rgba(255,255,255,0.0) 0%,
+                rgba(255,255,255,0.0) 25%,
+                rgba(0,0,0,0.04) 60%,
+                rgba(0,0,0,0.12) 100%);
+            z-index: 2;
+            backdrop-filter: blur(2px);
+            pointer-events: none;
+        }
+
+        .form-container {
+            position: relative;
+            z-index: 10;
+        }
+
+        .glass-effect {
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid #e63946;
+            box-shadow: 0 8px 32px 0 rgba(230, 57, 70, 0.3);
+        }
+
+        .input-field {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid #e63946;
+            transition: all 0.3s ease;
+            color: #000000;
+            font-size: 1.1rem;
+            font-weight: 500;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #e63946;
+            box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.12);
+            background: #ffffff;
+            color: #000000;
+        }
+
+        /* placeholder legible */
+        .input-field::placeholder {
+            color: #718096; /* gris medio */
+            opacity: 1;
+        }
+
+        /* etiquetas dentro del panel: blancas sobre fondo negro */
+        .glass-effect label {
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #e63946 0%, #d62e3b 100%);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #f15562 0%, #e63946 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(230, 57, 70, 0.4);
+        }
+
+        /* estilos para sub-opciones del formulario */
+        .sub-options {
+            background: rgba(255,255,255,0.85);
+            border: 1px solid rgba(230,57,70,0.12);
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+        }
+
+        .sub-options label input[type="checkbox"] {
+            accent-color: #e63946;
+        }
+
+        /* animación sutil al aparecer */
+        .sub-options {
+            transition: opacity 240ms ease, transform 240ms ease;
+            opacity: 1;
+        }
+
+        .sub-options[style*="display: none"] {
+            opacity: 0;
+            transform: translateY(-6px);
+        }
