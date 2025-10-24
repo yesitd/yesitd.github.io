@@ -1,2 +1,0 @@
-# yesitd.github.io
-periodico
